@@ -23,7 +23,7 @@ void Device::deactivate()
 	this->active = false;
 }
 
-Device::Device(unsigned int id, DeviceType type, std::string os)
+void Device::init(unsigned int id, DeviceType type, std::string os)
 {
 	this->id = id;
 	this->type = type;

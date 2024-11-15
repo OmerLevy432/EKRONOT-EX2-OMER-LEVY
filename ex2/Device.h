@@ -38,6 +38,6 @@ public:
 	// methods that change the artibutes of the object
 	void activate();
 	void deactivate();
-	Device(const unsigned int id, const DeviceType type, const std::string os);
+	void init(const unsigned int id, const DeviceType type, const std::string os);
 };
 
