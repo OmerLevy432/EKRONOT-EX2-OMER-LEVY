@@ -3,11 +3,11 @@
 
 class Page
 {
-public:
+private:
 	std::string status;
 	std::string posts;
 
-private:
+public:
 	// methods that don't change the artibutes of the object
 	std::string getPosts() const;
 	std::string getStatus() const;
