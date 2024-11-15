@@ -8,9 +8,9 @@
 class Profile
 {
 private:
-	User* owner;
-	Page* page;
-	UserList* friendList;
+	User owner;
+	Page page;
+	UserList friendList;
 
 public:
 	// methods that don't change the artibutes of the object
@@ -20,10 +20,9 @@ public:
 	std::string getFriendsWithSameNameLength() const;
 
 	// methods that change the artibutes of the object
-	void init(const User owner);
+	void init(const User& owner);
 	void clear();
 	void setStatus(const std::string new_status);
 	void addPostToProfilePage(const std::string post);
-	void addFriend(const User friend_to_add);
-
+	void addFriend(const User& friend_to_add);
 };

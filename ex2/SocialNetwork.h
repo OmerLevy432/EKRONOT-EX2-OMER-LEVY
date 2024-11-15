@@ -9,7 +9,7 @@ class SocialNetwork
 private:
 	std::string networkName;
 	int minAge;
-	ProfileList* profiles;
+	ProfileList profiles;
 
 public:
 	// methods that don't change the artibutes of the object
@@ -20,6 +20,6 @@ public:
 	// methods that change the artibutes of the object
 	void init(const std::string networkName, const int minAge);
 	void clear();
-	bool addProfile(const Profile profile_to_add);
+	bool addProfile(const Profile& profile_to_add);
 };
 

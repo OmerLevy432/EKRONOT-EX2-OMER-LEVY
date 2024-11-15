@@ -16,10 +16,14 @@ int SocialNetwork::getMinAge()
 std::string SocialNetwork::getWindowsDevices()
 {
 	// creating a pointer to the linkedlist of profiles
-	ProfileNode* current = this->profiles->get_first();
-
-	DevicesList devices;
+	ProfileNode* current = this->profiles.get_first();
 	std::string devicesString = "";
+
+	// check if the network has profiles
+	if (!current)
+	{
+		return devicesString;
+	}
 
 	// going over each profile
 	while (current->get_next())
@@ -42,18 +46,17 @@ void SocialNetwork::init(const std::string networkName, const int minAge)
 	// inits the profile linkedlist
 	ProfileList profiles;
 	profiles.init();
-	*this->profiles = profiles;
+	this->profiles = profiles;
 }
 
 void SocialNetwork::clear()
 {
 	this->networkName = "";
 	this->minAge = 0;
-	this->profiles->clear();
-	this->profiles = nullptr;
+	this->profiles.clear();
 }
 
-bool SocialNetwork::addProfile(const Profile profile_to_add)
+bool SocialNetwork::addProfile(const Profile& profile_to_add)
 {
 	// gets the user's age
 	unsigned int userAge = profile_to_add.getOwner().getAge();
@@ -65,5 +68,7 @@ bool SocialNetwork::addProfile(const Profile profile_to_add)
 	}
 
 	// adds the profile
-	this->profiles->add(profile_to_add);
+	this->profiles.add(profile_to_add);
+
+	return true;
 }

@@ -28,9 +28,20 @@ void Device::init(const unsigned int id, const DeviceType type, const std::strin
 	this->id = id;
 	this->type = type;
 	this->os = os;
+	this->active = true;
 }
 
 bool Device::isWindows() const
 {
 	return this->os == WINDOWS7 || this->os == WINDOWS10 || this->os == WINDOWS11;
+}
+
+unsigned int Device::getID() const
+{
+	return this->id;
+}
+
+DeviceType Device::getType() const
+{
+	return this->type;
 }

@@ -41,4 +41,3 @@ public:
 	void deactivate();
 	void init(const unsigned int id, const DeviceType type, const std::string os);
 };
-

@@ -15,14 +15,14 @@ unsigned int User::getAge() const
 {
 	return this->age;
 }
-DevicesList& User::getDevices() const
+DevicesList& User::getDevices()
 {
-	return *this->devices;
+	return this->devices;
 }
 bool User::checkIfDevicesAreOn() const
 {
 	// get a pointer to the head of the devices linkedlist
-	DeviceNode* current = this->devices->get_first();
+	DeviceNode* current = this->devices.get_first();
 
 	while (current)
 	{
@@ -41,6 +41,12 @@ void User::init(const unsigned int id, const std::string username, const unsigne
 	this->id = id;
 	this->username = username;
 	this->age = age;
+
+	// init the devices linkedlist
+	DevicesList devices;
+	devices.init();
+
+	this->devices = devices;
 }
 
 void User::clear()
@@ -51,21 +57,26 @@ void User::clear()
 	this->age = 0;
 
 	// resets the linkedlist of devices
-	this->devices->clear();
-	this->devices = nullptr;
+	this->devices.clear();
 }
 
-void User::addDevice(const Device newDevice)
+void User::addDevice(const Device& newDevice)
 {
-	this->devices->add(newDevice);
+	this->devices.add(newDevice);
 }
 
 std::string User::getWindowsDevices() const
 {
 	// set a pointer to the linkedlist of devices
-	DeviceNode* current = this->devices->get_first();
+	DeviceNode* current = this->devices.get_first();
 	Device currentDevice;
 	std::string devicesString = "";
+
+	// checking if the user has devices
+	if (!current)
+	{
+		return devicesString;
+	}
 
 	// going over each device
 	while (current->get_next())
