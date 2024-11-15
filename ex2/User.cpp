@@ -22,18 +22,17 @@ DevicesList& User::getDevices() const
 bool User::checkIfDevicesAreOn() const
 {
 	// get a pointer to the head of the devices linkedlist
-	DevicesList* current = this->devices;
+	DeviceNode* current = this->devices->get_first();
 
-	while (current->get_first())
+	while (current)
 	{
 		// checking if the device is not active
-		if (!current->get_first()->get_data().isActive())
+		if (!current->get_data().isActive())
 		{
 			return false;
 		}
-		current->set_first(current->get_first()->get_next());
+		current = current->get_next();
 	}
-
 	return true;
 }
 
@@ -54,4 +53,40 @@ void User::clear()
 	// resets the linkedlist of devices
 	this->devices->clear();
 	this->devices = nullptr;
+}
+
+void User::addDevice(const Device newDevice)
+{
+	this->devices->add(newDevice);
+}
+
+std::string User::getWindowsDevices() const
+{
+	// set a pointer to the linkedlist of devices
+	DeviceNode* current = this->devices->get_first();
+	Device currentDevice;
+	std::string devicesString = "";
+
+	// going over each device
+	while (current->get_next())
+	{
+		currentDevice = current->get_data();
+
+		// check if the device uses windows
+		if (currentDevice.isWindows())
+		{
+			devicesString = devicesString + "[" + std::to_string(currentDevice.getID()) + ", " + currentDevice.getOS() + "], ";
+		}
+
+		current = current->get_next();
+	}
+	currentDevice = current->get_data();
+
+	// check if the device uses windows
+	if (currentDevice.isWindows())
+	{
+		devicesString = devicesString + "[" + std::to_string(currentDevice.getID()) + ", " + currentDevice.getOS() + "], ";
+	}
+
+	return devicesString;
 }

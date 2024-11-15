@@ -15,6 +15,6 @@ public:
 	// methods that change the artibutes of the object
 	void init();
 	void clearPage();
-	void setStatus(std::string status);
-	void addLineToPosts(std::string new_line);
+	void setStatus(const std::string status);
+	void addLineToPosts(const std::string new_line);
 };

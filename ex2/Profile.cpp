@@ -4,6 +4,46 @@
 #include "UserList.h"
 
 
+void Profile::init(const User owner)
+{
+	*this->owner = owner;
+	
+	// inits a page
+	Page page;
+	page.init();
+	*this->page = page;
+
+	// inits the friends linkedlist
+	UserList friends;
+	friends.init();
+	*this->friendList = friends;
+}
+
+void Profile::clear()
+{
+	this->page->clearPage();
+	this->page = nullptr;
+	this->friendList->clear();
+	this->friendList = nullptr;
+	this->owner->clear();
+	this->owner = nullptr;
+}
+
+void Profile::setStatus(const std::string new_status)
+{
+	this->page->setStatus(new_status);
+}
+
+void Profile::addPostToProfilePage(const std::string post)
+{
+	this->page->addLineToPosts(post);
+}
+
+void Profile::addFriend(const User friend_to_add)
+{
+	this->friendList->add(friend_to_add);
+}
+
 User Profile::getOwner() const
 {
 	// copies the user of the owner
@@ -13,20 +53,58 @@ User Profile::getOwner() const
 	return userCopy;
 }
 
-void Profile::init(User owner)
-{
-	*this->owner = owner;
-}
-
 std::string Profile::getFriends() const
 {
 	std::string friendsInString = "";
-	UserList* current = this->friendList; // sets a pointer to the linkedlist of friends
+	UserNode* current = this->friendList->get_first(); // sets a pointer to the linkedlist of friends
 
-	while (current->get_first()->get_next())
+	// adds all the names of the friends to the string seperating each name with a ','
+	while (current->get_next())
 	{
-		friendsInString += current->get_first()->get_data().getUserName();
+		friendsInString += current->get_data().getUserName();
 		friendsInString += ",";
 	}
-	return friendsInString + current->get_first()->get_data().getUserName();
+
+	// adding the final name
+	return friendsInString + current->get_data().getUserName();
+}
+
+std::string Profile::getPage() const
+{
+	// gets the status of the user and adds it to the page string, adds the posts aswell
+	return "Status: " + this->page->getPosts() + "\n" + this->page->getPosts() + "\n";
+}
+
+std::string Profile::getFriendsWithSameNameLength() const
+{
+	// gets the length of the username
+	unsigned int nameLength = this->owner->getUserName().length();
+	std::string friendsInString = "";
+	std::string friendUsername = "";
+
+	// creating a pointer to the head of the friends linkedlist
+	UserNode* current = this->friendList->get_first();
+
+	// going over each friend from the friend list
+	while (current->get_next())
+	{
+		// gets the name of the friend
+		friendUsername = current->get_data().getUserName();
+
+		// checks if the lengthes match
+		if (friendUsername.length() == nameLength)
+		{
+			friendsInString += friendUsername;
+			friendsInString += ",";
+		}	
+	}
+
+	// adds the last friend's name if the lengthes match
+	friendUsername = current->get_data().getUserName();
+	if (friendUsername.length() == nameLength)
+	{
+		friendsInString += friendUsername;
+	}
+
+	return friendsInString;
 }

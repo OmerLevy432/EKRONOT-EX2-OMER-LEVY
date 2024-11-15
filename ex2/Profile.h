@@ -20,10 +20,10 @@ public:
 	std::string getFriendsWithSameNameLength() const;
 
 	// methods that change the artibutes of the object
-	void init(User owner);
+	void init(const User owner);
 	void clear();
-	void setStatus(std::string new_status);
-	void addPostToProfilePage(std::string post);
-	void addFriend(User friend_to_add);
+	void setStatus(const std::string new_status);
+	void addPostToProfilePage(const std::string post);
+	void addFriend(const User friend_to_add);
 
 };

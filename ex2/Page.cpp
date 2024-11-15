@@ -14,12 +14,12 @@ void Page::clearPage()
 	this->posts = "";
 }
 
-void Page::setStatus(std::string status)
+void Page::setStatus(const std::string status)
 {
 	this->status = status;
 }
 
-void Page::addLineToPosts(std::string new_line)
+void Page::addLineToPosts(const std::string new_line)
 {
 	this->posts += "\n"; // goes down a line
 	this->posts += new_line;

@@ -34,6 +34,7 @@ public:
 	bool isActive() const;
 	unsigned int getID() const;
 	DeviceType getType() const;
+	bool isWindows() const;
 
 	// methods that change the artibutes of the object
 	void activate();
