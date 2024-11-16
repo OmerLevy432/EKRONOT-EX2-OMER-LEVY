@@ -43,12 +43,13 @@ void Profile::addFriend(const User& friend_to_add)
 
 User Profile::getOwner() const
 {
-	// copies the user of the owner
-	User userCopy;
-	userCopy.init(this->owner.getID(), this->owner.getUserName(), this->owner.getAge());
+	//User userCopy;
 
+	//// copies the user of the owner
+	//userCopy.init(this->owner.getID(), this->owner.getUserName(), this->owner.getAge());
 
-	return userCopy;
+	//return userCopy;
+	return this->owner;
 }
 
 std::string Profile::getFriends() const
